@@ -28,7 +28,8 @@ module Garb
     def results(profile, options = {})
       start_date = options.fetch(:start_date, Time.now - MONTH)
       end_date = options.fetch(:end_date, Time.now)
-      default_params = build_default_params(profile, start_date, end_date)
+      api_key = profile.api_key
+      default_params = build_default_params(profile, start_date, end_date, api_key)
 
       param_set = [
         default_params,
@@ -70,11 +71,12 @@ module Garb
       sort
     end
 
-    def build_default_params(profile, start_date, end_date)
+    def build_default_params(profile, start_date, end_date, api_key)
       {
         'ids' => Garb.to_ga(profile.id),
         'start-date' => format_time(start_date),
-        'end-date' => format_time(end_date)
+        'end-date' => format_time(end_date),
+        'key' => api_key
       }
     end
 
