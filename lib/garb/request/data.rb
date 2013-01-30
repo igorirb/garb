@@ -16,9 +16,7 @@ module Garb
       end
 
       def query_string
-        puts "test"
-        puts Garb::Session.api_key
-        #parameters.merge!("key" => Garb::Session.api_key) unless Garb::Session.api_key.nil?
+        parameters.merge!("key" => Garb::Session.api_key) unless Garb::Session.api_key.nil?
         parameters.merge!("alt" => format)
         parameter_list = @parameters.map {|k,v| "#{k}=#{v}" }
         parameter_list.empty? ? '' : "?#{parameter_list.join('&')}"
